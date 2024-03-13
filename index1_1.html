@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Programa sintuação nota de Aluno</title>
+    <title>Programa situação nota de Aluno</title>
 </head>
 <body>
-    <h1>Programa Sintuação de Aluno </h1>
+    <h1>Programa Situação de Aluno </h1>
 
-    <form>
+    <form id="frm">
         <p>Nome do Aluno:
             <input type="text" id="InNome" required>
         </p>
@@ -20,11 +20,40 @@
             <input type="number" step="0.1" min="0" max="10" id="InNota2" required>
         </p>
         
-        <input style="background-color: chartreuse;" type="submit" value="Exibir média e Sintuação">
+        <input style="background-color: chartreuse;" type="submit" value="Exibir média e Situação">
     </form>
 
     <h3></h3>
     <h4></h4>
-    <script src="js/sript1_1.js"></script>
+    <script>
+        //Cria referência ao formulário e elementos de resposta do Programa
+        const frm = document.getElementById("frm");
+        const resp1 = document.querySelector("h3");
+        const resp2 = document.querySelector("h4");
+
+        //Criar um ouvinte de evento acionado quando o botão submit for clicado
+        frm.addEventListener("submit", (e) => {
+            e.preventDefault(); // evita envio para o formulário
+            const nome = document.getElementById("InNome").value; //Obter valores do formulário
+
+            const nota1 = Number(document.getElementById("InNota1").value);
+            const nota2 = Number(document.getElementById("InNota2").value);
+
+            const media = (nota1 + nota2) / 2; //calcula a média das notas
+            
+            // Exibindo a média
+            resp1.innerText = `Média das notas: ${media.toFixed(2)}`;
+
+            //Criando Condições
+            if (media >= 7) {
+                //altera a cor do estilo do elemento resp2
+                resp2.innerText = `Parabéns ${nome}! Você foi aprovado(a)`;
+                resp2.style.color = "blue";
+            } else {
+                resp2.innerText = `Ops ${nome}... Você foi reprovado(a)`;
+                resp2.style.color = "red";
+            }
+        });
+    </script>
 </body>
 </html>
